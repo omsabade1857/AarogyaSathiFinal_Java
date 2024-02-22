@@ -123,7 +123,7 @@ export default function AdminDashBoard() {
           <div className="col-lg-3">
             <div className="card" style={{width:'300px'}} >
               <img
-                src="https://amazingcharts.com/wp-content/uploads/2022/08/product-circles_amazing-chart-ehr-emr-circle.png"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvb4lJcLgP63SB8gs5CX4tMHzSnDiMrUT4Dw&usqp=CAU"
                 className="card-img-top"
                 style={{ height: "300px",width:'260px' }}
                 alt="..."

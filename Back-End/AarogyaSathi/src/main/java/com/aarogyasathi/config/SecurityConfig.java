@@ -35,7 +35,7 @@ public class SecurityConfig {
 		return http.cors().and()
 			.csrf(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests(
-					req->req.requestMatchers("/signup/**","/login/**","/history/**","/adminsignup")
+					req->req.requestMatchers("/signup/**","/login/**","/history/**")
 					.permitAll()
 					.requestMatchers("/patient/**","/appointment/**")
 					.hasRole("PATIENT")
