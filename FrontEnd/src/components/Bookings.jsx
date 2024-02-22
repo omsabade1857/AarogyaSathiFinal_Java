@@ -9,10 +9,7 @@ export function Bookings() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [doctors, setDoctors] = useState([]);
-  const [bookingDate, setBookingDate] = useState("");
-  const [bookingTime, setBookingTime] = useState("");
-  const [dateError, setDateError] = useState("");
-  const [timeError, setTimeError] = useState("");
+  const [bookingDetails, setBookingDetails] = useState([]);
 
   useEffect(() => {
     populateDoctorState();
@@ -22,38 +19,41 @@ export function Bookings() {
     try {
       const result = await doctorList();
       setDoctors(result.data);
+      // Initialize booking details state with empty values for each doctor
+      setBookingDetails(result.data.map(doctor => ({ doctorId: doctor.doctorId, bookingDate: "", bookingTime: "" })));
     } catch (error) {
       console.log(error);
     }
   }
 
-  const handleBookingDateChange = (e) => {
-    const dateValue = e.target.value;
-    setBookingDate(dateValue);
-    if (!dateValue) {
-      setDateError("Appointment date is required");
-    } else {
-      setDateError("");
-    }
+  const handleBookingDateChange = (doctorId, dateValue) => {
+    setBookingDetails(prevState => {
+      const updatedDetails = [...prevState];
+      const doctorIndex = updatedDetails.findIndex(detail => detail.doctorId === doctorId);
+      updatedDetails[doctorIndex].bookingDate = dateValue;
+      return updatedDetails;
+    });
   }
 
-  const handleBookingTimeChange = (e) => {
-    const timeValue = e.target.value;
-    setBookingTime(timeValue);
-    if (!timeValue) {
-      setTimeError("Appointment time is required");
-    } else {
-      setTimeError("");
-    }
+  const handleBookingTimeChange = (doctorId, timeValue) => {
+    setBookingDetails(prevState => {
+      const updatedDetails = [...prevState];
+      const doctorIndex = updatedDetails.findIndex(detail => detail.doctorId === doctorId);
+      updatedDetails[doctorIndex].bookingTime = timeValue;
+      return updatedDetails;
+    });
   }
 
   const handleSubmit = async (doctorId) => {
+    const doctorBooking = bookingDetails.find(detail => detail.doctorId === doctorId);
+    const { bookingDate, bookingTime } = doctorBooking;
+
     if (!bookingDate) {
-      setDateError("Appointment date is required");
+      alert("Appointment date is required");
       return;
     }
     if (!bookingTime) {
-      setTimeError("Appointment time is required");
+      alert("Appointment time is required");
       return;
     }
 
@@ -89,12 +89,10 @@ export function Bookings() {
               <td>{doctor.qualification}</td>
               <td>{doctor.specialization}</td>
               <td>
-                <Form.Control type="date" name="date" value={bookingDate} onChange={handleBookingDateChange} required />
-                {dateError && <span className="text-danger">{dateError}</span>}
+                <Form.Control type="date" name="date" value={bookingDetails.find(detail => detail.doctorId === doctor.doctorId)?.bookingDate || ""} onChange={(e) => handleBookingDateChange(doctor.doctorId, e.target.value)} required />
               </td>
               <td>
-                <Form.Control type="time" name="time" value={bookingTime} onChange={handleBookingTimeChange} required />
-                {timeError && <span className="text-danger">{timeError}</span>}
+                <Form.Control type="time" name="time" value={bookingDetails.find(detail => detail.doctorId === doctor.doctorId)?.bookingTime || ""} onChange={(e) => handleBookingTimeChange(doctor.doctorId, e.target.value)} required />
               </td>
               <td>
                 <Button variant="primary" onClick={() => handleSubmit(doctor.doctorId)}>Book Now</Button>

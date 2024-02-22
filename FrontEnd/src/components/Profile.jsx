@@ -72,14 +72,28 @@ export function Profile() {
 
     }
 
-    const handleUpdate = (appId) => {
-        const updatedRec = { newDate: bookingDate,newTime: bookingTime }
-        const result = UpdateAppointment(updatedRec, appId);
-        setBookingDate("");
-        setBookingTime("");
-        alert("Appointment updated successfully");
-        getBookings(patientId);
-    }
+    const handleUpdate = async (appId) => {
+        // Validate if both date and time are provided
+        if (!bookingDate || !bookingTime) {
+          alert("Please select both date and time.");
+          return;
+        }
+      
+        const updatedRec = { newDate: bookingDate, newTime: bookingTime };
+        try {
+          // Assuming UpdateAppointment is an asynchronous function
+          await UpdateAppointment(updatedRec, appId);
+          // Reset the input fields
+          setBookingDate("");
+          setBookingTime("");
+          alert("Appointment updated successfully");
+          // Refresh bookings after updating
+          getBookings(patientId);
+        } catch (error) {
+          console.error("Error updating appointment:", error);
+          alert("Failed to update the appointment.");
+        }
+      };
 
     const handleDelete =async (appId)=>{
         const result = await DeleteAppointment(appId);
@@ -183,8 +197,8 @@ export function Profile() {
                                         <td>{b[1]}</td>
                                         <td>{b[3]}</td>
                                         <td>{b[4]}</td>
-                                        <td><input type="date" name="date" onChange={handleNewDate} /></td>
-                                        <td><input type="time" name="time" onChange={handleNewTime} /></td>
+                                        <td><input type="date" name="date" onChange={handleNewDate} required/></td>
+                                        <td><input type="time" name="time" onChange={handleNewTime} required/></td>
                                         <td>
                                         <Button variant="primary" onClick={() => handleUpdate(b[0])} disabled={b[4] === 'REJECTED' || b[4] === 'ACCEPTED'}>Update</Button>
                                         </td>
@@ -247,10 +261,6 @@ export function Profile() {
 {/* {isLoggedIn ? null : <Alert variant="danger">Please Login First</Alert>} */}
 </Col>
 </Container>
-
-          
-
-
             </>
     );
 }

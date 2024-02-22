@@ -5,6 +5,8 @@ import './UpdateProfileForm.css';
 
 function UpdateProfileForm({ patientId, initialData, onClose }) {
     const [patientData, setPatientData] = useState(initialData);
+    const [error, setError] = useState('');
+
     const [passwordData, setPasswordData] = useState({
         oldPassword: '',
         newPassword: '',
@@ -52,24 +54,26 @@ function UpdateProfileForm({ patientId, initialData, onClose }) {
 
     const handlePasswordSubmit = async (e) => {
         e.preventDefault();
-        if (validatePasswordForm()) {
-            try {
-                await updatePassword(patientId, passwordData.oldPassword, passwordData.newPassword, passwordData.confirmNewPassword);
-                alert('Password updated successfully');
-            } catch (error) {
-                console.error('Error updating password:', error);
-                if (error.response && error.response.status === 400 && error.response.data && error.response.data.message) {
-                    const errorMessage = error.response.data.message;
-                    if (errorMessage.includes('Old password')) {
-                        alert('Wrong old password');
-                    } else if (errorMessage.includes('New password')) {
-                        alert('New password and confirm password do not match');
-                    } else {
-                        alert('Error updating password. Please try again.');
-                    }
+        if (!validatePasswordForm()) {
+            setError('All password fields are required');
+            return;
+        }
+        try {
+            await updatePassword(passwordData);
+            onClose(patientData); 
+            alert('Password updated successfully');
+        } catch (error) {
+            if ( error.response.status === 400) {
+                const errorMessage = error.response.data;
+                if (errorMessage.includes('Old password')) {
+                    alert('Wrong old password');
+                } else if (errorMessage.includes('New password')) {
+                    alert('New password and confirm password do not match');
                 } else {
                     alert('Error updating password. Please try again.');
                 }
+            } else {
+                alert('Error updating password. Please try again.');
             }
         }
     };
@@ -141,7 +145,7 @@ function UpdateProfileForm({ patientId, initialData, onClose }) {
                 // Add validation for old password if needed
                 break;
             case 'newPassword':
-                const passwordRegex = /^(?=.\d)(?=.[a-z])(?=.*[A-Z]).{6,}$/;
+               const passwordRegex = /^(?=.\d)(?=.[a-z])(?=.*[A-Z]).{6,}$/;
                 if (!passwordRegex.test(value)) {
                     errorMessage = 'Password must contain at least 6 characters, one uppercase letter, one lowercase letter, and one digit';
                 }
