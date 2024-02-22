@@ -1,0 +1,183 @@
+.Carousel{
+    margin-top: 10px;
+  }
+  
+  .Carousel-Caption {
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      text-align: center;
+      word-wrap: break-word;
+    }
+  
+    .Img{
+      width: 100%;
+    }
+  
+    .Ctitle{
+      color: white;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+  
+     .Content1{
+      max-width: 100%;
+      margin: 1.5rem;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      word-wrap: break-word;
+    }
+  
+    .text1{
+      margin: 1.5rem;
+      text-align: center;
+      word-wrap: break-word;
+    }
+  
+    .text1-info{
+      margin: 1.5rem;
+      text-align: center;
+      font-size: large;
+      font-style: italic;
+    }
+  
+    .text1-subtitle{
+      font-size: larger;
+      font-family: 'Times New Roman', Times, serif;
+    }
+  
+    .text2{
+      font-weight: bold;
+      margin: 1.5rem;
+      font-size: large;
+      text-align: center;
+      word-wrap: break-word;
+    }
+  
+    .text3-1{
+      color: green;
+    }
+  
+    .text3-1:hover {
+      transform: scale(1.05);
+     }
+  
+    .Content1-5{
+      display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+  
+    .img1-5{
+      width: 85%;
+    }
+  
+    .Content2{
+      max-width: 100%;
+      background-image: 'url("https://img.freepik.com/free-photo/abstract-luxury-gradient-blue-background-smooth-dark-blue-with-black-vignette-studio-banner_1258-101399.jpg?size=626&ext=jpg&ga=GA1.1.971321758.1707925740&semt=ais")';
+      
+      background-repeat: no-repeat;
+      text-align: center;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      position: relative;
+      isolation: isolate;
+      word-wrap: break-word;
+    }
+  
+    .Content2::after{
+      content: '';
+      position: absolute;
+      z-index: -1;
+      background-color: rgb(146, 208, 231);
+      inset: 0;
+      opacity: .5;
+    }
+  
+    .title{
+      font-size: 25px;
+      font-weight: bolder;
+      text-align: center;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      overflow-wrap: break-word;
+    }
+  
+    .titletop{
+      text-decoration: underline;
+      color: black;
+      font-weight: bolder;
+      padding-top: 1rem;
+      text-align: center;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      overflow-wrap: break-word;
+    }
+  
+    img{
+      margin-left: 15px;
+      opacity: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+  
+    .Content3{
+      text-align: center;
+    }
+  
+    .Content3-title{
+      font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    }
+  
+    .card-container {
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
+      }
+  
+   .card {
+      transition: transform 0.3s;
+      width: 220px;
+      overflow: hidden;
+      border-radius: 5%;
+     }
+  
+   .card-image {
+      width: 100%;
+      height: auto;
+      max-height: 230px;
+      object-fit: cover;
+    }
+  
+    .card-content{
+      font-size: 12px;
+      padding-bottom: 8px;
+    }
+   
+    .overlay {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      position: absolute;
+      top: 160px;
+      left: 0;
+      width: 100%;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+    }
+     
+     .card:hover {
+      transform: scale(1.05);
+     }
+  
+     .a{
+      color: green;
+     }
+  
+    @media (max-width: 768px) {
+      .titletop, .title, .text1-info, .Ctitle, .text1, .text2 {
+         font-size: 0.8em;
+      }
+     }
+  
+     @media (max-width: 768px) {
+        .card-title, .card-image, .card-content, .card, .overlay {
+         font-size: 0.8em;
+      }
+     }

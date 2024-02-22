@@ -1,0 +1,53 @@
+c:\Users\User\Desktop\AarogyaSathi\AarogyaSathi-Frontend\src\components\Profile.jsx.update-profile-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px; /* Adjust the maximum width as needed */
+    margin: auto; /* Center the form horizontally */
+}
+.errorMessage{
+    text-align: center;
+    color: red;
+}
+.input-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+
+.form-group {
+    margin-bottom: 1rem; /* Add space between form groups */
+}
+
+label {
+    margin-bottom: 0.5rem; /* Add space below labels */
+}
+
+input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.UpdateProfileButton {
+    width: 150px;
+    height: 40px;
+    padding: 0rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    margin-left: 43%;
+    border-radius: 4px;
+    cursor: pointer;
+} 
+
+button:hover {
+    background-color: #0056b3;
+}

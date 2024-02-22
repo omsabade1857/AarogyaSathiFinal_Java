@@ -1,0 +1,21 @@
+
+body{
+   text-decoration: none;
+}
+
+.right{
+    display:flex;
+    position:absolute;
+    right: 5rem;
+    }
+
+.textcolor{
+    color:rgb(245, 244, 244);
+    text-decoration: none;
+}
+
+.bar{
+        background-color: #5d94cb ;
+        font-weight:500;
+}
+/* #5d94cb */
